@@ -1,0 +1,16 @@
+- name: include install tasks
+  include_tasks: install.yaml
+
+- name: include mariadb tasks
+  include_tasks: mariadb.yaml
+  when: semaphore_database_server == "mysql"
+
+- name: include configure tasks
+  include_tasks: configure.yaml
+
+- name: Start semaphore
+  ansible.builtin.systemd:
+    name: semaphore
+    state: started
+    daemon_reload: true
+    enabled: true

@@ -1,0 +1,24 @@
+- name: Install mariadb server
+  ansible.builtin.apt:
+    name: mariadb-server
+    update_cache: true
+    state: present
+
+- name: Install MySQL-python
+  ansible.builtin.apt:
+    name: python3-mysqldb 
+
+- name: Create a new database for semaphore
+  community.mysql.mysql_db:
+    name: "{{ semaphore_mysql_database }}"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Create a new user for semaphore
+  community.mysql.mysql_user:
+    name: "{{ semaphore_mysql_user}}"
+    password: "{{ semaphore_mysql_password }}"
+    host: "{{ semaphore_mysql_host }}"
+    priv: "{{ semaphore_mysql_database }}.*:ALL"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock

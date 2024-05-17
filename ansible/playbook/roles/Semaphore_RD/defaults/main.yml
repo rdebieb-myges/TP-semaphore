@@ -1,0 +1,15 @@
+semaphore_package_version: 2.9.75
+semaphore_package_type: amd64
+semaphore_package_os: linux
+
+semaphore_database_server: mysql
+
+semaphore_mysql_database: semaphore
+semaphore_mysql_user: semaphore
+semaphore_mysql_password: ChangeMe
+semaphore_mysql_host: localhost
+
+semaphore_user_name: ryan
+semaphore_user_login: ryan
+semaphore_user_email: ryan@test.fr
+semaphore_user_password: ryan

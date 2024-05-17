@@ -1,0 +1,12 @@
+- name: Install Semaphore
+  ansible.builtin.apt:
+    deb: "https://github.com/semaphoreui/semaphore/releases/download/v{{ semaphore_package_version }}/semaphore_{{ semaphore_package_version }}_{{ semaphore_package_os}}_{{ semaphore_package_type }}.deb"
+
+- name: Create config file
+  ansible.builtin.template:
+    src: config.json.j2
+    dest: /home/ryandebieb7820/config.json
+
+- name: Force systemd to reread config
+  ansible.builtin.systemd:
+    daemon_reload: true

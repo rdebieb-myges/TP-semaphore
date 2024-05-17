@@ -1,0 +1,5 @@
+- name: Use Semaphore
+  hosts: semaphore
+  become: true
+  roles:
+  - role: Semaphore_RD

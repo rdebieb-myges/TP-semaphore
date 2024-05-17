@@ -1,0 +1,14 @@
+- name: Check
+  ansible.builtin.command: semaphore user get --login={{ semaphore_user_login }}
+  register: checkresult
+  failed_when: false
+  changed_when: false
+
+- name: Create admin user
+  ansible.builtin.command: semaphore user add --admin --login {{ semaphore_user_login }} --name {{ semaphore_user_name }} --email {{ semaphore_user_email }} --password {{ semaphore_user_password }}
+  when: checkresult is failed
+
+- name: Create systemd file
+  ansible.builtin.template:
+    src: systemd.service.j2
+    dest: /etc/systemd/system/semaphore.service
